@@ -1,0 +1,12 @@
+.friend {
+    color: white;
+    font-size: 30px;
+    margin-top: 40px;
+  }
+  
+  .listenerFtiends {
+    color: white;
+    font-size: 15px;
+    display: flex;
+    
+  }

@@ -1,0 +1,15 @@
+.nav {
+  grid-area: n;
+  background-color: rgb(42, 165, 144);
+  padding: 20px;
+}
+
+.item {
+  color: white;
+  text-decoration: none;
+}
+
+.active {
+  color: rgb(122, 59, 59);
+  text-decoration: none;
+}
