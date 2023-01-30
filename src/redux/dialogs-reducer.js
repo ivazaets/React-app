@@ -1,50 +1,56 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_POST_TEXT_TWO = "UPDATE-NWE-POST-TEXT";
+const UPDATE_NEW_POST_TEXT_TWO = "UPDATE-NEW-MESSAGE";
 
 let initialState = {
-    messagesData: [
-        { id: 1, message: "Ooops, sorry, baby" },
-        { id: 2, message: "Hello, how are you?" },
-        { id: 3, message: "Ahahahahahaa, it's sooo funny" },
-        { id: 4, message: "You are very beautiful today" },
-      ],
-      
-      newPostTextTwo: "Hello my dear friend! How are you?",
+  messagesData: [
+    { id: 1, message: "Ooops, sorry, baby" },
+    { id: 2, message: "Hello, how are you?" },
+    { id: 3, message: "Ahahahahahaa, it's sooo funny" },
+    { id: 4, message: "You are very beautiful today" },
+  ],
 
-      dialogsData: [
-        { id: 1, name: "Ira" },
-        { id: 2, name: "Andrew" },
-        { id: 3, name: "Olya" },
-        { id: 4, name: "Alex" },
-      ],
-}
+  newPostTextTwo: "Hello my dear friend! How are you?",
+
+  dialogsData: [
+    { id: 1, name: "Ira" },
+    { id: 2, name: "Andrew" },
+    { id: 3, name: "Olya" },
+    { id: 4, name: "Alex" },
+  ],
+};
 
 export const dialogsReducer = (state = initialState, action) => {
+  let stateCopy;
   switch (action.type) {
     case ADD_MESSAGE:
-    const newMessage = {
-      id: 1,
-      message: state.newPostTextTwo,
-    };
-    state.messagesData.push(newMessage);
-    state.newPostTextTwo = "";
+      stateCopy = {
+        ...state,
+        messagesData: [...state.messagesData, {id: 1, message: state.newPostTextTwo}],
+        newPostTextTwo: ""
+      };
+      return stateCopy;
     case UPDATE_NEW_POST_TEXT_TWO:
-    state.newPostTextTwo = action.newTextTwo;
+      stateCopy = {
+        ...state,
+        newPostTextTwo: action.newTextTwo
+      };
+      return stateCopy;
+    default:
+      return state;
   }
-  return state;
 };
 
 export const addMessageActionCreator = () => {
-    return {
-      type: ADD_MESSAGE,
-    };
+  return {
+    type: ADD_MESSAGE,
   };
-  
-  export const updateNewPostTextTwoActionCreator = (text) => {
-    return {
-      type: UPDATE_NEW_POST_TEXT_TWO,
-      newTextTwo: text,
-    };
+};
+
+export const updateNewPostTextTwoActionCreator = (text) => {
+  return {
+    type: UPDATE_NEW_POST_TEXT_TWO,
+    newTextTwo: text,
   };
+};
 
 export default dialogsReducer;

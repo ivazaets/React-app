@@ -1,37 +1,33 @@
-import React from "react";
+import React from "react"
 import style from "./MyPosts.module.css";
 import Post from "./Posts/Post";
 
-const  MyPosts = (props) => {
+const MyPosts = (props) => {
 
-  const myPostElement = props.myPostsData.map ( post => <Post message={post.message} like={post.like} />);
-  
-  let createRef = React.createRef();
+  let state = props.profilePage;
 
-  let clickOnMe = () => {
-    //props.dispatch (addPostActionCreator());
-    props.addPost ();
-  };
+let myPostsElement = state.myPostsData.map ( p => <Post message={p.message} id={p.id} like={p.like}/>);;
+let newPostText = state.newPostText;
 
-  let onPostChancge = () => {
-    let text = createRef.current.value;
-    props.updateNewPostText ();
-   // props.dispatch (updateNewPostTextActionCreator(text));
-  };
+let createRef = React.createRef();
 
-    return (
-    <div className={style.postBlock}> 
-        My Posts
-    <div>New post</div>
-    <button onClick={clickOnMe}>Click on me</button>
-    <textarea onChange={onPostChancge} value={props.newPostText} ref={createRef} />
-    <div className={style.posts}>
-     { myPostElement }
-    </div>
-    </div>
-    )
+let clickOnMeTwo = () => {
+  props.addPost();
 };
 
-
+let onPostChancge = () => {
+  let text = createRef.current.value;
+  props.updateNewPostText(text);
+};
+  return (
+    <div className={style.dialogs}>
+      <button onClick={clickOnMeTwo}>Click on me</button>
+    <textarea onChange={onPostChancge} value={newPostText} ref={createRef} />
+      <div className={style.dialogs_item}>
+      { myPostsElement }
+      </div>
+    </div>
+  );
+};
 
 export default MyPosts;

@@ -8,21 +8,27 @@ let initialState = {
     { id: 1, message: "Hello, my name Peter", like: " 9" },
   ],
   newPostText: "It-kamasutra, eeeey!",
-}
+};
 
 export const profileReducer = (state = initialState, action) => {
+  let stateCopy;
   switch (action.type) {
-    case ADD_POST:
-    const newPost = {
-      id: 1,
-      message: state.newPostText,
-    };
-    state.messagesData.push(newPost);
-    state.newPostText = "";
     case UPDATE_NEW_POST_TEXT:
-    state.newPostText = action.newText;
+      stateCopy = {
+        ...state,
+        newPostText: action.newPost
+      };
+      return stateCopy;
+    case ADD_POST:
+      stateCopy = {
+        ...state,
+        newPostText: "",
+        myPostsData: [...state.myPostsData, {id: 1, message: state.newPostText, like: "34",}],
+      };
+      return stateCopy;
+    default:
+      return state;
   }
-  return state;
 };
 
 export const addPostActionCreator = () => {
@@ -34,7 +40,7 @@ export const addPostActionCreator = () => {
 export const updateNewPostTextActionCreator = (text) => {
   return {
     type: UPDATE_NEW_POST_TEXT,
-    newText: text,
+    newPost: text,
   };
 };
 
