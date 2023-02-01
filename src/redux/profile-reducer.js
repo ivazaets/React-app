@@ -16,14 +16,17 @@ export const profileReducer = (state = initialState, action) => {
     case UPDATE_NEW_POST_TEXT:
       stateCopy = {
         ...state,
-        newPostText: action.newPost
+        newPostText: action.newPost,
       };
       return stateCopy;
     case ADD_POST:
       stateCopy = {
         ...state,
         newPostText: "",
-        myPostsData: [...state.myPostsData, {id: 1, message: state.newPostText, like: "34",}],
+        myPostsData: [
+          ...state.myPostsData,
+          { id: 1, message: state.newPostText, like: "0" },
+        ],
       };
       return stateCopy;
     default:
